@@ -26,7 +26,7 @@ plot(summary_daily, type = "l", xlab = "Interval", ylab = "Number of steps")
 summary_daily[which.max(summary_daily$mean),]$interval
 ```
 **Imputing missing values**
-
+I use the mean for the 5-minute interval to fill in the missing values.  
 ```{r, echo = TRUE}
 total_NA <- sum(is.na(activity$steps))
 nrow <- as.numeric(nrow(activity))

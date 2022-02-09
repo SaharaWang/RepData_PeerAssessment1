@@ -8,6 +8,26 @@ output: html_document
 
 ```r
 library(tidyverse)
+```
+
+```
+## -- Attaching packages -------------------
+```
+
+```
+## √ ggplot2 3.3.5     √ purrr   0.3.4
+## √ tibble  3.1.4     √ dplyr   1.0.7
+## √ tidyr   1.1.4     √ stringr 1.4.0
+## √ readr   2.1.1     √ forcats 0.5.1
+```
+
+```
+## -- Conflicts --- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
+```r
 library(lattice)
 activity <- read.csv("activity.csv", header = T)
 ```
@@ -19,7 +39,7 @@ summary <- activity %>% group_by(date) %>% summarise(sum = sum(steps, na.rm = TR
 hist(summary$sum, xlab = "Number of steps", main = "Histogram of the total number of steps taken each day")
 ```
 
-![plot of chunk unnamed-chunk-123](figure/unnamed-chunk-123-1.png)
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
 
 ```r
 mean <- mean(summary$sum)
@@ -33,7 +53,7 @@ summary_daily <- activity %>% group_by(interval) %>% summarise(mean = mean(steps
 plot(summary_daily, type = "l", xlab = "Interval", ylab = "Number of steps")
 ```
 
-![plot of chunk unnamed-chunk-124](figure/unnamed-chunk-124-1.png)
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
 
 ```r
 summary_daily[which.max(summary_daily$mean),]$interval
@@ -43,7 +63,7 @@ summary_daily[which.max(summary_daily$mean),]$interval
 ## [1] 835
 ```
 **Imputing missing values**
-
+I use the mean for the 5-minute interval to fill in the missing values.  
 
 ```r
 total_NA <- sum(is.na(activity$steps))
@@ -59,7 +79,7 @@ new_summary <- new_activity %>% group_by(date) %>% summarise(sum = sum(steps, na
 hist(new_summary$sum, xlab = "Number of steps", main = "Histogram of the total number of steps taken each day -- NA imputed")
 ```
 
-![plot of chunk unnamed-chunk-125](figure/unnamed-chunk-125-1.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
 
 ```r
 mean <- mean(summary$sum)
@@ -103,4 +123,4 @@ g + geom_line(color = "steelblue") +
         labs(x = "Interval", y = "Number of steps")
 ```
 
-![plot of chunk unnamed-chunk-126](figure/unnamed-chunk-126-1.png)
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
